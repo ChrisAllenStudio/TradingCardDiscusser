@@ -1,0 +1,58 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: tan;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-size {
+    font-size: 12px;
+}
+
+.logo-text-size {
+    font-size: 24px;
+}
+
+.search-container { 
+    background-color: rgb(223, 230, 163);
+    border: 1px solid white;
+    box-shadow: none;
+    border-radius: 30px;
+}
+
+.navbar-custom {
+    background-color: rgb(223, 230, 163);
+}
+
+.navbar-custom .navbar-brand,
+.narbar-custom .navbar-text {
+    color: purple;
+}
+
+.search-bar-center {
+    position: fixed;
+    display: inline;
+    left: 50%;
+    transform: translatex(-50%);
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(54, 85, 58);
+    color: white;
+    text-align: center;
+}
+
+.search-image {
+    background: rgb(223, 230, 163) url('images/search_image_button.png');
+    padding-left: 8px;
+    height: 16px;
+}
+
+.roborox-logo {
+    width: 50px;
+    height: auto;
+}
