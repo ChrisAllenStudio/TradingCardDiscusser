@@ -36,11 +36,6 @@ body {
     transform: translatex(-50%);
 }
 
-.flex {
-    display: flex;
-    flex-direction: row;
-}
-
 .footer {
     position: fixed;
     left: 0;
