@@ -23,6 +23,15 @@
                 </section>
             </div>
             <ul class="nav">
+                <li>
+                    <!-- Search bar at the top starts here --> 
+                    <!-- <div id="search-bar-top" class="search-bar-top"> -->
+                        <div id="header-search" class="header-search d-none"> <!--d-none went on this line-->
+                                <input id="search-header" type="text" placeholder="Search">                
+                            <button id="top-button-search" type="button" class="btn-primary search-image"> </button>
+                        </div> <!-- Top of search bar end-->
+                    <!-- </div> -->
+                </li>
                 <li class="nav-item">
                 <a class="nav-link" href="index.html" target="_blank">Home</a>
                 </li>
@@ -45,19 +54,18 @@
                 Text in row 1 column 1
             </div>
             <div class="col-sm-4" >
-                <br><h1>Look for a card</h1>
+    
                 <!--Search bar-->
-                <section class="navbar-form search-container">
+                <div id="search-container" class="search-container" >
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
                     <button id="submit-search" type="button" class="btn-primary search-image"></button>
-                </section> <!--End of search bar-->
+                </div> <!--End of search bar-->
             </div>
             <div class="col-sm-4">
                 Text in row 1 column 3
             </div>
-
         </div>
 
         <div class="row">
