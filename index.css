@@ -23,6 +23,7 @@ body {
     border: 1px solid white;
     box-shadow: none;
     border-radius: 30px;
+    margin-top: 50px;
 }
 
 .navbar-custom {
@@ -38,7 +39,6 @@ body {
     position: fixed;
     display: inline;
     left: 50%;
-    transform: translatex(-50%);
 }
 
 .footer {
