@@ -39,7 +39,6 @@ body {
     position: fixed;
     display: inline;
     left: 50%;
-    /* transform: translatex(-50%); */
 }
 
 .footer {
@@ -62,12 +61,3 @@ body {
     width: 50px;
     height: auto;
 }
-
-
-/*
-.search-bar-top {
-    display: none;
-
-} */
-/* This hides the top search bar, but why is it not being shown from the javascript stuff
-*/
