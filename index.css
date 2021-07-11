@@ -19,14 +19,12 @@ body {
 }
 
 .search-container { 
-    background-color: rgb(223, 230, 163);
-    border: 1px solid white;
     box-shadow: none;
     border-radius: 30px;
     margin-top: 50px;
 }
 
-.navbar-custom {
+.bg-custom {
     background-color: rgb(223, 230, 163);
 }
 
@@ -61,3 +59,8 @@ body {
     width: 50px;
     height: auto;
 }
+
+ 
+/* This is the way I found that might work for making the top search form to the right of the roborox text, but is there a better way? I don't know if this will work on every resolution
+*/
+

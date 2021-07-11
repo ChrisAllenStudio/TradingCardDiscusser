@@ -12,40 +12,38 @@
     
     <!-- Code will go here for the bootstrap template-->
 
-<!--Navbar-->
-    <nav id="top-navbar" class="navbar navbar-custom">
+    <nav class="navbar navbar-expand-lg navbar-light bg-custom">
         <div class="container-fluid">
-            <!-- Logo-->
-            <div class="navbar-header">
-                <section>
-                    <img src="images/robologo.png" class="roborox-logo" alt="Roborox logo">
-                    <a class="navbar-brand" href="#">RoboRox</a>
-                </section>
-            </div>
-            <ul class="nav">
-                <li>
-                    <!-- Search bar at the top starts here --> 
-                    <!-- <div id="search-bar-top" class="search-bar-top"> -->
-                        <div id="header-search" class="header-search d-none"> <!--d-none went on this line-->
-                                <input id="search-header" type="text" placeholder="Search">                
-                            <button id="top-button-search" type="button" class="btn-primary search-image"> </button>
-                        </div> <!-- Top of search bar end-->
-                    <!-- </div> -->
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="index.html" target="_blank">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="index.html" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="index.html" target="_blank">Chris' Blog</a>
-                </li>
-                </li>
-            </ul>
-        </div>
-    </nav>
+          <a class="navbar-brand" href="index.html">Roborox</a>
+          <!-- Hamburger button-->
+          <button id="hamburger-button"class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+              <!-- The navbar supposed content part here is referencing the ID of the stuff in the navbar below so that when it goes to hamburger mode, it knows to put the entire div inside of it-->
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- End hamburger button-->
 
+          <!-- Start search bar-->
+          <form id="header-search" class="d-flex d-none">
+            <input class="form-control" type="search" placeholder="Search">
+            <button class="btn-primary search-image" type="button"></button>
+          </form>
+          <!-- end search bar -->
+
+          <!-- Items in the navbar-->
+          <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-end" >
+            <ul class="navbar-nav"> 
+              <li class="nav-item">
+                <a class="nav-link active" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Chris' blog</a>
+              </li>
+            </ul>
+            <!-- End of items in navbar-->
+            
+          </div>
+        </div>
+      </nav>
 <!-- row 1 -->
     <div class="container main-content" >
 
@@ -56,12 +54,10 @@
             <div class="col-sm-4" >
     
                 <!--Search bar-->
-                <div id="search-container" class="search-container" >
-                    <div class="form-group">
+                    <form id="search-container" class="d-flex">
                         <input type="text" class="form-control" placeholder="Search">
-                    </div>
                     <button id="submit-search" type="button" class="btn-primary search-image"></button>
-                </div> <!--End of search bar-->
+                    </form>  <!--End of search bar-->
             </div>
             <div class="col-sm-4">
                 Text in row 1 column 3
@@ -102,3 +98,6 @@
     <script src="js/app.js"></script>
 </body>
 </html>
+
+
+<!-- currently running into problems where when going down in size on the screen to try smaller resolutions, the hamburger button looks really weird-->
