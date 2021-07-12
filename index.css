@@ -55,12 +55,12 @@ body {
     height: 16px;
 }
 
+.image-search {
+    width: 30px;
+    height: 30px
+}
+
 .roborox-logo {
     width: 50px;
     height: auto;
 }
-
- 
-/* This is the way I found that might work for making the top search form to the right of the roborox text, but is there a better way? I don't know if this will work on every resolution
-*/
-
