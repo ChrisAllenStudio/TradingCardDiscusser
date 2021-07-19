@@ -48,14 +48,15 @@ function addDelegateEventListener(parentElement,
         }
     }
 
-    function handleResultSelection(evt) 
+    function handleResultSelection() 
     {
-          
+        // hide visibility of the search results when one is clicked
+        console.log(anchorElement.id)
     }
 
 // function to get data from scryfall
     function getApiDataFromScryfall(searchText) {
-        window.fetch(`https://api.scryfall.com/cards/autocomplete?q=${searchText}`, // fetching data from scryfall
+        window.fetch(`https://api.scryfall.com/cards/autocomplete?q=${searchText}` // fetching data from scryfall
         )
         .then(response => response.json())
         .then(result => {
@@ -65,17 +66,47 @@ function addDelegateEventListener(parentElement,
             for(let i = 0; i < result.data.length; i++) {
                 let cardName =  result.data[i];
                 let searchFetchList = document.createElement('li'); // creates list 
-                let anchorElement = document.createElement('a'); // creates anchor 
+                anchorElement = document.createElement('a'); // creates anchor 
                 
                 anchorElement.textContent = cardName; // assign the indivudual value of i to the text that is printed 
-                anchorElement.id = cardName.replace(' ', '-');
+                anchorElement.id = cardName.replace(' ', '+');
+                let cardId = anchorElement.id
                 searchFetchList.appendChild(anchorElement); // add anchor to list item  
                 searchFetchUnorderedList.appendChild(searchFetchList); // add list item to unordered lsit 
 
                 // click event so that when you click the result card you want, it will then run a seperate function
-                anchorElement.addEventListener('click', handleResultSelection); 
-            }
+                anchorElement.addEventListener('click', e => {
+                    // hides all of the div list when stuff is clicked, then store which one is clicked into a variable 
+                    console.log(cardId) 
+                    let autoCompleteResultsDiv = document.getElementById('autocomplete-results');
+                    autoCompleteResultsDiv.classList.add('d-none');
+                    getCardDetailsFromScryfall(cardId);
+                    
+                } 
+                )}
         }); // END OF FETCH 
+    }
+
+    function getCardDetailsFromScryfall(cardId) {
+        fetch(`https://api.scryfall.com/cards/named?exact=${cardId}`) // fetch data from scryfall
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            // card oracle text 
+            let cardOracleText = result.oracle_text; // gets the oracle text from the result 
+            console.log(cardOracleText);
+            let rowOneColumnThree = document.getElementById('row1-column3'); // establish row 1 column 3 into javascript
+            let htmlCardOracleText = document.createTextNode(cardOracleText); // create the text of the oracle text 
+            rowOneColumnThree.appendChild(htmlCardOracleText); // append row 1 column 3 with the oracle text 
+            // end of card oracle text
+            
+            // card image
+            let imageLink = result.image_uris.small;
+            let cardImage = document.getElementById('card-image');
+            cardImage.src = imageLink;
+
+
+        })
     }
 
 // function to do something if there is no text in the search field 
@@ -99,6 +130,7 @@ function searchBoxesDoingStuff(searchText)
     });
 
     headerSearchButton.addEventListener('click', () => {
+        autoCompleteResultsDiv.classList.remove('d-none');
         let searchText = document.getElementById('top-search-text').value;
         if(searchText) {
             getApiDataFromScryfall(searchText);
