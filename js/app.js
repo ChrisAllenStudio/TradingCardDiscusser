@@ -1,3 +1,4 @@
+
 function addDelegateEventListener(parentElement,
     childSelector,
     eventType,
@@ -23,22 +24,21 @@ function addDelegateEventListener(parentElement,
         useCapture);
     }
 
-// basic iffe function
+// iffe function of the code 
 (function(){
     // get elemnent id is faster than queryselect
     const submitSearch = document.getElementById('submit-search'); 
-    // header-search
-    // search-container
-
+    const headerSearchButton = document.getElementById('header-search-button');
+   
     function toggleSearchTextboxVisiblity() {
     
-        const headerSearch = document.getElementById('header-search'); 
+        const headerSearcContainer = document.getElementById('header-search-container'); 
         const searchContainer = document.getElementById('search-container');
 
-        if (headerSearch.classList.contains('d-none')){ // if headersearch contains d-none as a class
-            headerSearch.classList.remove('d-none'); // then remove the class
+        if (headerSearcContainer.classList.contains('d-none')){ // if headersearch contains d-none as a class
+            headerSearcContainer.classList.remove('d-none'); // then remove the class
         } else { //if not
-            headerSearch.classList.add('d-none'); // then add d-none as the class
+            headerSearcContainer.classList.add('d-none'); // then add d-none as the class
         }
 
         if (searchContainer.classList.contains('d-none')){
@@ -48,7 +48,66 @@ function addDelegateEventListener(parentElement,
         }
     }
 
-    submitSearch.addEventListener('click', toggleSearchTextboxVisiblity);
+    function handleResultSelection(evt) 
+    {
+          
+    }
+
+// function to get data from scryfall
+    function getApiDataFromScryfall(searchText) {
+        window.fetch(`https://api.scryfall.com/cards/autocomplete?q=${searchText}`, // fetching data from scryfall
+        )
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            let searchFetchUnorderedList = document.getElementById('autocomplete-results-list'); // get the id of the unordered list 
+
+            for(let i = 0; i < result.data.length; i++) {
+                let cardName =  result.data[i];
+                let searchFetchList = document.createElement('li'); // creates list 
+                let anchorElement = document.createElement('a'); // creates anchor 
+                
+                anchorElement.textContent = cardName; // assign the indivudual value of i to the text that is printed 
+                anchorElement.id = cardName.replace(' ', '-');
+                searchFetchList.appendChild(anchorElement); // add anchor to list item  
+                searchFetchUnorderedList.appendChild(searchFetchList); // add list item to unordered lsit 
+
+                // click event so that when you click the result card you want, it will then run a seperate function
+                anchorElement.addEventListener('click', handleResultSelection); 
+            }
+        }); // END OF FETCH 
+    }
+
+// function to do something if there is no text in the search field 
+function searchClickedButNoTextInBar() {
+    alert('Search term requires, you dummy!')
+}
+
+// function for the search boxes to work when the search button is cliced 
+function searchBoxesDoingStuff(searchText)
+{
+    if(searchText) {
+        toggleSearchTextboxVisiblity();
+        getApiDataFromScryfall(searchText);
+    } else {
+        searchClickedButNoTextInBar()
+    }
+}
+    submitSearch.addEventListener('click', () => { 
+        let searchText = document.getElementById('middle-search-text').value;
+        searchBoxesDoingStuff(searchText)
+    });
+
+    headerSearchButton.addEventListener('click', () => {
+        let searchText = document.getElementById('top-search-text').value;
+        if(searchText) {
+            getApiDataFromScryfall(searchText);
+        }
+        else {
+            searchClickedButNoTextInBar()
+        }
+    });
+
 })();
 
 /***
@@ -56,5 +115,6 @@ function addDelegateEventListener(parentElement,
 let anchorElement = document.createElement('a');
 anchorElement.id = 'card-name<djld>';
 
-div.append(anchorElement);
+div.appendChild(anchorElement);
 */
+

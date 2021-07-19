@@ -8,6 +8,7 @@ body {
 
 .main-content {
     font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .text-size {
@@ -19,14 +20,12 @@ body {
 }
 
 .search-container { 
-    background-color: rgb(223, 230, 163);
-    border: 1px solid white;
     box-shadow: none;
     border-radius: 30px;
     margin-top: 50px;
 }
 
-.navbar-custom {
+.bg-custom {
     background-color: rgb(223, 230, 163);
 }
 
@@ -55,6 +54,11 @@ body {
     background: rgb(223, 230, 163) url('images/search_image_button.png');
     padding-left: 8px;
     height: 16px;
+}
+
+.image-search {
+    width: 30px;
+    height: 30px
 }
 
 .roborox-logo {

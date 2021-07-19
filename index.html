@@ -12,43 +12,44 @@
     
     <!-- Code will go here for the bootstrap template-->
 
-<!--Navbar-->
-    <nav id="top-navbar" class="navbar navbar-custom">
+    <nav class="navbar navbar-expand-md navbar-light bg-custom">
         <div class="container-fluid">
-            <!-- Logo-->
-            <div class="navbar-header">
-                <section>
-                    <img src="images/robologo.png" class="roborox-logo" alt="Roborox logo">
-                    <a class="navbar-brand" href="#">RoboRox</a>
-                </section>
-            </div>
-            <ul class="nav">
-                <li>
-                    <!-- Search bar at the top starts here --> 
-                    <!-- <div id="search-bar-top" class="search-bar-top"> -->
-                        <div id="header-search" class="header-search d-none"> <!--d-none went on this line-->
-                                <input id="search-header" type="text" placeholder="Search">                
-                            <button id="top-button-search" type="button" class="btn-primary search-image"> </button>
-                        </div> <!-- Top of search bar end-->
-                    <!-- </div> -->
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="index.html" target="_blank">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="index.html" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="index.html" target="_blank">Chris' Blog</a>
-                </li>
-                </li>
+          <a class="navbar-brand" href="index.html">Roborox</a>
+          <form id="header-search-container" class="d-flex d-none">
+            <!-- Start search bar -->
+            <input id="top-search-text" class="form-control user-input" type="text" placeholder="Search">          
+            <button id="header-search-button" type="button" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                </svg>
+              </button>
+          </form>
+          <!-- End search bar -->
+          
+          <!-- Hamburger button-->
+          <button id="hamburger-button"class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+              <!-- The navbar supposed content part here is referencing the ID of the stuff in the navbar below so that when it goes to hamburger mode, it knows to put the entire div inside of it-->
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- End hamburger button-->
+
+          <!-- Items in the navbar-->
+          <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-end" >
+            <ul class="navbar-nav"> 
+              <li class="nav-item">
+                <a class="nav-link active" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Chris' blog</a>
+              </li>
             </ul>
+            <!-- End of items in navbar-->
+          </div>
         </div>
-    </nav>
-
-<!-- row 1 -->
+      </nav>
+<!-- rows on page -->
     <div class="container main-content" >
-
+        <!-- row 1 -->
         <div id="content-search" class="row">
             <div class="col-sm-4">
                 Text in row 1 column 1
@@ -56,21 +57,26 @@
             <div class="col-sm-4" >
     
                 <!--Search bar-->
-                <div id="search-container" class="search-container" >
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                    <form id="search-container" class="d-flex">
+                        <input id="middle-search-text" type="text" class="form-control user-input" placeholder="Search">
+                    <button id="submit-search" type="button" class="search-image"></button>
+                    </form>  <!--End of search bar-->
+                     <div id="autocomplete-results"> 
+                        <ul id="autocomplete-results-list">
+                             <a id="autocomplete-result-links"> </a>
+
+                        </ul>
                     </div>
-                    <button id="submit-search" type="button" class="btn-primary search-image"></button>
-                </div> <!--End of search bar-->
             </div>
             <div class="col-sm-4">
                 Text in row 1 column 3
             </div>
         </div>
-
+        <!-- row 2-->
         <div class="row">
             <div class="col-sm-4">
                 Text in row 2 column 1
+                <img id="card-image" src="https://c1.scryfall.com/file/scryfall-cards/small/front/4/c/4cbc6901-6a4a-4d0a-83ea-7eefa3b35021.jpg?1625979257">
             </div>
             <div class="col-sm-4" >
                 Text in row 2 column 2
@@ -79,7 +85,7 @@
                 Text in row 2 column 3
             </div>
         </div>
-  
+        <!-- row 3-->
         <div class="row">
             <div class="col-sm-4">
                 Text in row 3 column 1
