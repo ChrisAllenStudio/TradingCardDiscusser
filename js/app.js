@@ -48,6 +48,11 @@ function addDelegateEventListener(parentElement,
         }
     }
 
+    function handleResultSelection(evt) 
+    {
+          
+    }
+
 // function to get data from scryfall
     function getApiDataFromScryfall(searchText) {
         window.fetch(`https://api.scryfall.com/cards/autocomplete?q=${searchText}`, // fetching data from scryfall
@@ -55,17 +60,23 @@ function addDelegateEventListener(parentElement,
         .then(response => response.json())
         .then(result => {
             console.log(result);
-            let searchFetchUnorderedList = document.getElementById('autocomplete-results-unordered-list');
+            let searchFetchUnorderedList = document.getElementById('autocomplete-results-list'); // get the id of the unordered list 
+
             for(let i = 0; i < result.data.length; i++) {
+                let cardName =  result.data[i];
                 let searchFetchList = document.createElement('li'); // creates list 
                 let anchorElement = document.createElement('a'); // creates anchor 
-                anchorElement.textContent = result.data[i]; // assign the indivudual value of i to the text that is printed 
+                
+                anchorElement.textContent = cardName; // assign the indivudual value of i to the text that is printed 
+                anchorElement.id = cardName.replace(' ', '-');
                 searchFetchList.appendChild(anchorElement); // add anchor to list item  
                 searchFetchUnorderedList.appendChild(searchFetchList); // add list item to unordered lsit 
-                }
+
+                // click event so that when you click the result card you want, it will then run a seperate function
+                anchorElement.addEventListener('click', handleResultSelection); 
+            }
         }); // END OF FETCH 
     }
-
 
 // function to do something if there is no text in the search field 
 function searchClickedButNoTextInBar() {
