@@ -29,7 +29,8 @@ function addDelegateEventListener(parentElement,
     // get elemnent id is faster than queryselect
     const submitSearch = document.getElementById('submit-search'); 
     const headerSearchButton = document.getElementById('header-search-button');
-   
+    const tcgLink = document.getElementById('tcg-link');
+    const cardmarketLink = document.getElementById('card-market-link');
     function toggleSearchTextboxVisiblity() {
     
         const headerSearcContainer = document.getElementById('header-search-container'); 
@@ -54,6 +55,18 @@ function addDelegateEventListener(parentElement,
         console.log(anchorElement.id)
     }
 
+    function toggleLinkvisibility() {
+        if (tcgLink.classList.contains('d-none')){
+            // if it contains d-none, then remove it
+            tcgLink.classList.remove('d-none');
+            cardmarketLink.classList.remove('d-none');
+        } else{
+            tcgLink.classList.add('d-none');
+            cardmarketLink.classList.add('d-none');
+        }
+    }
+
+
 // function to get data from scryfall
     function getApiDataFromScryfall(searchText) {
         window.fetch(`https://api.scryfall.com/cards/autocomplete?q=${searchText}` // fetching data from scryfall
@@ -61,6 +74,9 @@ function addDelegateEventListener(parentElement,
         .then(response => response.json())
         .then(result => {
             console.log(result);
+            if(result.data.length === 0){
+                alert('Please type a real card name in');
+            }
             let searchFetchUnorderedList = document.getElementById('autocomplete-results-list'); // get the id of the unordered list 
 
             for(let i = 0; i < result.data.length; i++) {
@@ -77,10 +93,12 @@ function addDelegateEventListener(parentElement,
                 // click event so that when you click the result card you want, it will then run a seperate function
                 anchorElement.addEventListener('click', e => {
                     // hides all of the div list when stuff is clicked, then store which one is clicked into a variable 
-                    console.log(cardId) 
+                    console.log(cardId);
+                    toggleLinkvisibility();
                     let autoCompleteResultsDiv = document.getElementById('autocomplete-results');
                     autoCompleteResultsDiv.classList.add('d-none');
                     getCardDetailsFromScryfall(cardId);
+                    
                     
                 } 
                 )}
@@ -92,18 +110,77 @@ function addDelegateEventListener(parentElement,
         .then(response => response.json())
         .then(result => {
             console.log(result);
-            // card oracle text 
-            let cardOracleText = result.oracle_text; // gets the oracle text from the result 
-            console.log(cardOracleText);
-            let rowOneColumnThree = document.getElementById('row1-column3'); // establish row 1 column 3 into javascript
-            let htmlCardOracleText = document.createTextNode(cardOracleText); // create the text of the oracle text 
-            rowOneColumnThree.appendChild(htmlCardOracleText); // append row 1 column 3 with the oracle text 
-            // end of card oracle text
+
+            // card oracle text
+            let oracleText = document.getElementById('oracle-text'); // establish row 1 column 2 into javascript
+            // if oracle text has tap image
+            if (result.oracle_text.includes('{T}')) {
+                var replacedOracleText = result.oracle_text.replaceAll('{T}' , 'Tap');
+            }  else { 
+                replacedOracleText = result.oracle_text;
+            }
+            if (result.oracle_text) {
+                let htmlCardOracleText = document.createTextNode(replacedOracleText); // create the text of the oracle text 
+                oracleText.appendChild(htmlCardOracleText); // append row 1 column 3 with the oracle text 
+            } else{
+                let noOracleText = document.createTextNode(result.name + ' has no oracle text :(');
+                oracleText.appendChild(noOracleText);
+            }
+
             
             // card image
             let imageLink = result.image_uris.small;
             let cardImage = document.getElementById('card-image');
             cardImage.src = imageLink;
+
+            // card name 
+            let cardNameAfterSearch = document.getElementById('card-name-after-searched');
+            let htmlCardNameAfterSearch = document.createTextNode(result.name);
+            cardNameAfterSearch.appendChild(htmlCardNameAfterSearch);
+
+            // power and toughness
+            if(result.power && result.toughness) {
+                let powerAndToughness = document.getElementById('power-and-toughness');
+                let htmlPowerAndToughness = document.createTextNode(result.power + "/" + result.toughness);
+                powerAndToughness.appendChild(htmlPowerAndToughness);
+            }
+
+            // card type
+            let cardTypeAfterSearch = document.getElementById('card-type-after-searched');
+            let htmlCardTypeAfterSearch = document.createTextNode(result.type_line);
+            cardTypeAfterSearch.appendChild(htmlCardTypeAfterSearch);
+
+            // flavor text
+            let flavorText = document.getElementById('flavor-text');
+            if (result.flavor_text){
+                let htmlFlavorText = document.createTextNode(' "' + result.flavor_text + '"');
+                flavorText.appendChild(htmlFlavorText);
+            } else {
+                let noFlavorText = document.createTextNode(result.name + ' has no flavor text :('); 
+                flavorText.appendChild(noFlavorText);
+            }
+
+            // set card is from as well as link to TCGplayer
+            let cardSet = document.getElementById('card-set');
+            let htmlCardSet = document.createTextNode(result.set_name);
+            cardSet.appendChild(htmlCardSet);
+
+            // links
+            tcgLink.href = result.purchase_uris.tcgplayer;
+            cardmarketLink.href = result.purchase_uris.cardmarket;
+
+            //rarity 
+            let rarity = document.getElementById('rarity');
+            let htmlRarity = document.createTextNode(result.rarity);
+            rarity.appendChild(htmlRarity);
+
+            // artist 
+            let artist = document.getElementById('artist');
+            let htmlArtist = document.createTextNode('Artist: ' + result.artist);
+            artist.appendChild(htmlArtist);
+
+
+
 
 
         })
@@ -130,7 +207,7 @@ function searchBoxesDoingStuff(searchText)
     });
 
     headerSearchButton.addEventListener('click', () => {
-        autoCompleteResultsDiv.classList.remove('d-none');
+        
         let searchText = document.getElementById('top-search-text').value;
         if(searchText) {
             getApiDataFromScryfall(searchText);
