@@ -40,7 +40,7 @@
                 <a class="nav-link active" href="index.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Chris' blog</a>
+                <a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Chris' blog</a>
               </li>
             </ul>
             <!-- End of items in navbar-->
@@ -51,59 +51,72 @@
     <div class="container main-content" >
         <!-- row 1 -->
         <div id="content-search" class="row">
-            <div class="col-sm-4">
-                Text in row 1 column 1
+            <div id="row1-column1" class="col-sm">
+                <img id="card-image" class="card-image-size" src="">
+                
             </div>
-            <div class="col-sm-4" >
-    
+            <div id="row1-column2" class="col-sm" >
+              <div id="card-name" class="card-name"> </div>
+              <div id="card-type" class="card-type"> </div>
+              <div id="oracle-text" class="oracle-text"> </div>
+              <div id="power-and-toughness" class="power-and-toughness"> </div>
+              <div id="flavor-text" class="flavor-text"> </div>
+
                 <!--Search bar-->
                     <form id="search-container" class="d-flex">
                         <input id="middle-search-text" type="text" class="form-control user-input" placeholder="Search">
                     <button id="submit-search" type="button" class="search-image"></button>
                     </form>  <!--End of search bar-->
-                     <div id="autocomplete-results"> 
-                        <ul id="autocomplete-results-list">
+                    <div id="autocomplete-results" > 
+                        <ul id="autocomplete-results-list" class="autocomplete-results">
                              <a id="autocomplete-result-links"> </a>
 
                         </ul>
                     </div>
             </div>
-            <div class="col-sm-4">
-                Text in row 1 column 3
+            <div id="row1-column3" class="col-sm">
+                <div id="rarity" class="rarity"> </div>
+                <div id="artist" class="artist"> </div>
+                
             </div>
         </div>
         <!-- row 2-->
         <div class="row">
-            <div class="col-sm-4">
-                Text in row 2 column 1
-                <img id="card-image" src="https://c1.scryfall.com/file/scryfall-cards/small/front/4/c/4cbc6901-6a4a-4d0a-83ea-7eefa3b35021.jpg?1625979257">
+            <div id="card-set" class="col-sm card-set">   
             </div>
-            <div class="col-sm-4" >
-                Text in row 2 column 2
+            <a id="tcg-link" href="" target="_blank" class="d-none tcg-link"> TCGplayer Link </a>
+            <a id="card-market-link" href="" target="_blank" class="d-none card-market-link"> Card Market Link </a>
+            <div id="row2-column2" class="col-sm" >
+                
             </div>
-            <div class="col-sm-4">
-                Text in row 2 column 3
+            <div class="col-sm">
+                
             </div>
         </div>
         <!-- row 3-->
         <div class="row">
-            <div class="col-sm-4">
-                Text in row 3 column 1
+            <div id="row3-column1" class="col-sm">
+                
             </div>
-            <div class="col-sm-4" >
-                Text in row 3 column 2
+            <div id="row3-column2" class="col-sm" >
+               
             </div>
-            <div class="col-sm-4">
-                Text in row 3 column 3
+            <div id="row3-column3" class="col-sm">
+            
+                
             </div>
         </div>
 
     </div>
 
+    <!-- Not the best solution but these brs keep the footer from covering part of the content on mobile view -->
+    <br> <br> <br>
+
+
 <!--Footer at the bottom-->
     <div class="footer">
-        <p>Want a good time? Call (614) 555-1776 for the greatest time of your life. ;)</p>
-      </div>
+        <p>Please send and and all feedback as well as bugs found to <a href="mailto:jengle@roborox.com">jengle@roborox.com</a>  </p>
+    </div>
 
     <script src="js/app.js"></script>
 </body>
