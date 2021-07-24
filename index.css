@@ -3,8 +3,10 @@ body {
     margin: 0;
     background: tan;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 24px;
 }
+
+
 
 .main-content {
     font-size: 12px;
@@ -40,6 +42,8 @@ body {
     left: 50%;
 }
 
+
+
 .footer {
     position: fixed;
     left: 0;
@@ -48,6 +52,7 @@ body {
     background-color: rgb(54, 85, 58);
     color: white;
     text-align: center;
+    font-size: 20px;
 }
 
 .search-image {
@@ -65,3 +70,35 @@ body {
     width: 50px;
     height: auto;
 }
+
+.rarity {
+    text-transform: capitalize;
+}
+
+.card-image-size {
+    width: 300px;
+}
+
+.card-name {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.autocomplete-results {
+    font-size: 20px;
+}
+
+
+.card-type, .oracle-text, .flavor-text, .artist, .rarity, .card-set, .tcg-link, .card-market-link, .power-and-toughness {
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+a:hover {
+    background-color: none;
+  }
+
+li:hover {
+    cursor: pointer;
+}
+

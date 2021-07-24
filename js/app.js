@@ -67,8 +67,34 @@ function addDelegateEventListener(parentElement,
     }
 
 
+
+    function clearAutocompleteResults() {
+        document.getElementById('top-search-text').value = '';
+        document.getElementById('middle-search-text').value = '';
+        document.getElementById('autocomplete-results-list').innerHTML = '';
+    }
+
+    function clearCardDetail() {
+        document.getElementById('card-image').src = '';
+        document.getElementById('card-name').innerHTML = '';
+        document.getElementById('card-type').innerHTML = '';
+        document.getElementById('oracle-text').innerHTML = '';
+        document.getElementById('power-and-toughness').innerHTML = '';
+        document.getElementById('power-and-toughness').innerHTML = '';
+        document.getElementById('rarity').innerHTML = '';
+        document.getElementById('artist').innerHTML = '';
+        document.getElementById('flavor-text').innerHTML = '';
+        document.getElementById('card-set').innerHTML = '';
+        tcgLink.classList.add('d-none');
+        cardmarketLink.classList.add('d-none');
+    }
+
+
+
 // function to get data from scryfall
     function getApiDataFromScryfall(searchText) {
+        clearCardDetail();
+        clearAutocompleteResults();
         window.fetch(`https://api.scryfall.com/cards/autocomplete?q=${searchText}` // fetching data from scryfall
         )
         .then(response => response.json())
@@ -95,8 +121,7 @@ function addDelegateEventListener(parentElement,
                     // hides all of the div list when stuff is clicked, then store which one is clicked into a variable 
                     console.log(cardId);
                     toggleLinkvisibility();
-                    let autoCompleteResultsDiv = document.getElementById('autocomplete-results');
-                    autoCompleteResultsDiv.classList.add('d-none');
+                    clearAutocompleteResults();
                     getCardDetailsFromScryfall(cardId);
                     
                     
@@ -105,20 +130,45 @@ function addDelegateEventListener(parentElement,
         }); // END OF FETCH 
     }
 
+    // fetch the card symbols from scryfall
+    // then I want to run a for loop, and for each mana symbol in card name, replace with the actual mana symbol 
+
+
+
     function getCardDetailsFromScryfall(cardId) {
         fetch(`https://api.scryfall.com/cards/named?exact=${cardId}`) // fetch data from scryfall
         .then(response => response.json())
         .then(result => {
             console.log(result);
 
-            // card oracle text
-            let oracleText = document.getElementById('oracle-text'); // establish row 1 column 2 into javascript
-            // if oracle text has tap image
+            function getCardSymbolsFromScryfall() {
+                fetch(`https://api.scryfall.com/symbology`)
+                .then(response => response.json())
+                .then(symbolResults => {
+                    console.log(symbolResults);
+                    x = symbolResults.data['0'].english;
+                    console.log(x);
+                })
+            }
+
+            // card symbol stuff, might need refactored later
+            getCardSymbolsFromScryfall()
+/*            for(let i = 0; i < result.length; i++) {
+                var replacedOracleText = result.oracle_text.replaceAll('{T}', symbolResults.data['0'].english)
+            }
+*/            
+
+            // code now, refactor this part later
             if (result.oracle_text.includes('{T}')) {
                 var replacedOracleText = result.oracle_text.replaceAll('{T}' , 'Tap');
             }  else { 
                 replacedOracleText = result.oracle_text;
             }
+
+            // card oracle text
+            let oracleText = document.getElementById('oracle-text'); // establish row 1 column 2 into javascript
+            // if oracle text has tap image
+            
             if (result.oracle_text) {
                 let htmlCardOracleText = document.createTextNode(replacedOracleText); // create the text of the oracle text 
                 oracleText.appendChild(htmlCardOracleText); // append row 1 column 3 with the oracle text 
@@ -127,16 +177,19 @@ function addDelegateEventListener(parentElement,
                 oracleText.appendChild(noOracleText);
             }
 
+
             
             // card image
-            let imageLink = result.image_uris.small;
+            let imageLink = result.image_uris.normal;
             let cardImage = document.getElementById('card-image');
             cardImage.src = imageLink;
 
-            // card name 
-            let cardNameAfterSearch = document.getElementById('card-name-after-searched');
-            let htmlCardNameAfterSearch = document.createTextNode(result.name);
+            // card name and mana cost 
+            let cardNameAfterSearch = document.getElementById('card-name');
+            let htmlCardNameAfterSearch = document.createTextNode(result.name + " " + result.mana_cost);
             cardNameAfterSearch.appendChild(htmlCardNameAfterSearch);
+
+           
 
             // power and toughness
             if(result.power && result.toughness) {
@@ -146,7 +199,7 @@ function addDelegateEventListener(parentElement,
             }
 
             // card type
-            let cardTypeAfterSearch = document.getElementById('card-type-after-searched');
+            let cardTypeAfterSearch = document.getElementById('card-type');
             let htmlCardTypeAfterSearch = document.createTextNode(result.type_line);
             cardTypeAfterSearch.appendChild(htmlCardTypeAfterSearch);
 
@@ -191,6 +244,7 @@ function searchClickedButNoTextInBar() {
     alert('Search term requires, you dummy!')
 }
 
+
 // function for the search boxes to work when the search button is cliced 
 function searchBoxesDoingStuff(searchText)
 {
@@ -207,7 +261,6 @@ function searchBoxesDoingStuff(searchText)
     });
 
     headerSearchButton.addEventListener('click', () => {
-        
         let searchText = document.getElementById('top-search-text').value;
         if(searchText) {
             getApiDataFromScryfall(searchText);

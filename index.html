@@ -51,66 +51,72 @@
     <div class="container main-content" >
         <!-- row 1 -->
         <div id="content-search" class="row">
-            <div id="row1-column1" class="col-sm-4">
-                <img id="card-image" src="">
+            <div id="row1-column1" class="col-sm">
+                <img id="card-image" class="card-image-size" src="">
                 
             </div>
-            <div id="row1-column2" class="col-sm-4" >
-              <div id="card-name-after-searched"> </div>
-              <div id="card-type-after-searched"> </div>
-              <div id="oracle-text"> </div>
-              <div id="power-and-toughness"> </div>
+            <div id="row1-column2" class="col-sm" >
+              <div id="card-name" class="card-name"> </div>
+              <div id="card-type" class="card-type"> </div>
+              <div id="oracle-text" class="oracle-text"> </div>
+              <div id="power-and-toughness" class="power-and-toughness"> </div>
+              <div id="flavor-text" class="flavor-text"> </div>
 
                 <!--Search bar-->
                     <form id="search-container" class="d-flex">
                         <input id="middle-search-text" type="text" class="form-control user-input" placeholder="Search">
                     <button id="submit-search" type="button" class="search-image"></button>
                     </form>  <!--End of search bar-->
-                    <div id="autocomplete-results" class=""> 
-                        <ul id="autocomplete-results-list">
+                    <div id="autocomplete-results" > 
+                        <ul id="autocomplete-results-list" class="autocomplete-results">
                              <a id="autocomplete-result-links"> </a>
 
                         </ul>
                     </div>
             </div>
-            <div id="row1-column3" class="col-sm-4">
-                <div id="rarity"> </div>
-                <div id="artist"> </div>
+            <div id="row1-column3" class="col-sm">
+                <div id="rarity" class="rarity"> </div>
+                <div id="artist" class="artist"> </div>
                 
             </div>
         </div>
         <!-- row 2-->
         <div class="row">
-            <div id="card-set" class="col-sm-4">   
+            <div id="card-set" class="col-sm card-set">   
             </div>
-            <a id="tcg-link" href="" target="_blank" class="d-none"> TCGplayer Link </a>
-            <a id="card-market-link" href="" target="_blank" class="d-none"> Card Market Link </a>
-            <div id="row2-column2" class="col-sm-4" >
+            <a id="tcg-link" href="" target="_blank" class="d-none tcg-link"> TCGplayer Link </a>
+            <a id="card-market-link" href="" target="_blank" class="d-none card-market-link"> Card Market Link </a>
+            <div id="row2-column2" class="col-sm" >
                 
             </div>
-            <div id="flavor-text" class="col-sm-4">
+            <div class="col-sm">
                 
             </div>
         </div>
         <!-- row 3-->
         <div class="row">
-            <div id="row3-column1" class="col-sm-4">
+            <div id="row3-column1" class="col-sm">
                 
             </div>
-            <div id="row3-column2" class="col-sm-4" >
+            <div id="row3-column2" class="col-sm" >
                
             </div>
-            <div id="row3-column3" class="col-sm-4">
+            <div id="row3-column3" class="col-sm">
+            
                 
             </div>
         </div>
 
     </div>
 
+    <!-- Not the best solution but these brs keep the footer from covering part of the content on mobile view -->
+    <br> <br> <br>
+
+
 <!--Footer at the bottom-->
     <div class="footer">
-        <p>Want a good time? Call (614) 555-1776 for the greatest time of your life. ;)</p>
-      </div>
+        <p>Please send and and all feedback as well as bugs found to <a href="mailto:jengle@roborox.com">jengle@roborox.com</a>  </p>
+    </div>
 
     <script src="js/app.js"></script>
 </body>
