@@ -64,8 +64,6 @@ function addDelegateEventListener(parentElement,
         }
     }
 
-
-
     function clearAutocompleteResults() {
         document.getElementById('header-search-text').value = '';
         document.getElementById('search-text').value = '';
@@ -86,8 +84,6 @@ function addDelegateEventListener(parentElement,
         tcgLink.classList.add('d-none');
         cardmarketLink.classList.add('d-none');
     }
-
-
 
     // function to get data from scryfall
     function getApiDataFromScryfall(searchText) {
@@ -132,8 +128,6 @@ function addDelegateEventListener(parentElement,
     // fetch the card symbols from scryfall
     // then I want to run a for loop, and for each mana symbol in card name, replace with the actual mana symbol 
 
-
-
     function getCardDetailsFromScryfall(cardId) {
         fetch(`https://api.scryfall.com/cards/named?exact=${cardId}`) // fetch data from scryfall
             .then(response => response.json())
@@ -169,14 +163,10 @@ function addDelegateEventListener(parentElement,
                 // if oracle text has tap image
 
                 if (result.oracle_text) {
-                    let htmlCardOracleText = document.createTextNode(replacedOracleText); // create the text of the oracle text 
-                    oracleText.appendChild(htmlCardOracleText); // append row 1 column 3 with the oracle text 
+                    oracleText.textContent = replacedOracleText;
                 } else {
-                    let noOracleText = document.createTextNode(result.name + ' has no oracle text :(');
-                    oracleText.appendChild(noOracleText);
+                    oracleText.textContent = result.name + ' has no oracle text :(';
                 }
-
-
 
                 // card image
                 let imageLink = result.image_uris.normal;
@@ -185,36 +175,28 @@ function addDelegateEventListener(parentElement,
 
                 // card name and mana cost 
                 let cardNameAfterSearch = document.getElementById('card-name');
-                let htmlCardNameAfterSearch = document.createTextNode(result.name + " " + result.mana_cost);
-                cardNameAfterSearch.appendChild(htmlCardNameAfterSearch);
-
-
+                cardNameAfterSearch.textContent = result.name + ' ' + result.mana_cost;
 
                 // power and toughness
                 if (result.power && result.toughness) {
                     let powerAndToughness = document.getElementById('power-and-toughness');
-                    let htmlPowerAndToughness = document.createTextNode(result.power + "/" + result.toughness);
-                    powerAndToughness.appendChild(htmlPowerAndToughness);
+                    powerAndToughness.textContent = result.power + "/" + result.toughness;
                 }
 
                 // card type
                 let cardTypeAfterSearch = document.getElementById('card-type');
-                let htmlCardTypeAfterSearch = document.createTextNode(result.type_line);
-                cardTypeAfterSearch.appendChild(htmlCardTypeAfterSearch);
+                cardTypeAfterSearch.textContent = result.type_line;
 
                 // flavor text
                 let flavorText = document.getElementById('flavor-text');
                 if (result.flavor_text) {
-                    let htmlFlavorText = document.createTextNode(' "' + result.flavor_text + '"');
-                    flavorText.appendChild(htmlFlavorText);
+                    flavorText.textContent = ' "' + result.flavor_text + '"';
                 } else {
-                    let noFlavorText = document.createTextNode(result.name + ' has no flavor text :(');
-                    flavorText.appendChild(noFlavorText);
+                    flavorText.textContent = result.name + ' has no flavor text :(';
                 }
 
                 // set card is from as well as link to TCGplayer
                 let cardSet = document.getElementById('card-set');
-                debugger;
                 cardSet.textContent = 'Sets: ' + result.set_name;
 
                 // links
