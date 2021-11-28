@@ -26,19 +26,20 @@ function addDelegateEventListener(parentElement,
 // iffe function of the code 
 (function () {
     // get elemnent id is faster than queryselect
-    const submitSearch = document.getElementById('submit-search');
-    const headerSearchButton = document.getElementById('submit-header-search');
+    // const submitSearch = document.getElementById('submit-search');
+    // const headerSearchButton = document.getElementById('submit-header-search');
     const tcgLink = document.getElementById('tcg-link');
     const cardmarketLink = document.getElementById('card-market-link');
+
     function toggleSearchTextboxVisiblity() {
 
-        const headerSearcContainer = document.getElementById('header-search-container');
+        const headerSearchContainer = document.getElementById('header-search-container');
         const searchContainer = document.getElementById('search-container');
 
-        if (headerSearcContainer.classList.contains('d-none')) { // if headersearch contains d-none as a class
-            headerSearcContainer.classList.remove('d-none'); // then remove the class
+        if (headerSearchContainer.classList.contains('d-none')) { // if headersearch contains d-none as a class
+            headerSearchContainer.classList.remove('d-none'); // then remove the class
         } else { //if not
-            headerSearcContainer.classList.add('d-none'); // then add d-none as the class
+            headerSearchContainer.classList.add('d-none'); // then add d-none as the class
         }
 
         if (searchContainer.classList.contains('d-none')) {
@@ -46,11 +47,6 @@ function addDelegateEventListener(parentElement,
         } else {
             searchContainer.classList.add('d-none');
         }
-    }
-
-    function handleResultSelection() {
-        // hide visibility of the search results when one is clicked
-        console.log(anchorElement.id)
     }
 
     function toggleLinkvisibility() {
@@ -110,17 +106,15 @@ function addDelegateEventListener(parentElement,
                     searchFetchList.appendChild(anchorElement); // add anchor to list item  
                     searchFetchUnorderedList.appendChild(searchFetchList); // add list item to unordered lsit 
 
-                    // click event so that when you click the result card you want, it will then run a seperate function
+                    // submit event so that when you submit the result card you want, it will then run a seperate function
                     anchorElement.addEventListener('click', e => {
                         // hides all of the div list when stuff is clicked, then store which one is clicked into a variable 
                         console.log(cardId);
                         toggleLinkvisibility();
                         clearAutocompleteResults();
                         getCardDetailsFromScryfall(cardId);
-
-
-                    }
-                    )
+                    })
+                    
                 }
             }); // END OF FETCH 
     }
@@ -219,7 +213,7 @@ function addDelegateEventListener(parentElement,
     }
 
     // function for the search boxes to work when the search button is cliced 
-    function searchBoxesDoingStuff(searchText) {
+    function getResultsFromMainSearch(searchText) {
         if (searchText) {
             toggleSearchTextboxVisiblity();
             getApiDataFromScryfall(searchText);
@@ -227,12 +221,19 @@ function addDelegateEventListener(parentElement,
             searchClickedButNoTextInBar()
         }
     }
-    submitSearch.addEventListener('click', () => {
+
+    const searchContainer = document.getElementById('search-container');
+
+    searchContainer.addEventListener('submit', (event) => {
+        event.preventDefault()
         let searchText = document.getElementById('search-text').value;
-        searchBoxesDoingStuff(searchText)
+        getResultsFromMainSearch(searchText)
     });
 
-    headerSearchButton.addEventListener('click', () => {
+    const headerSearchContainer = document.getElementById('header-search-container');
+
+    headerSearchContainer.addEventListener('submit', (event) => {
+        event.preventDefault()
         let searchText = document.getElementById('header-search-text').value;
         if (searchText) {
             getApiDataFromScryfall(searchText);
