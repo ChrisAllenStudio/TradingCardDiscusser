@@ -31,6 +31,21 @@ function addDelegateEventListener(parentElement,
     const tcgLink = document.getElementById('tcg-link');
     const cardmarketLink = document.getElementById('card-market-link');
 
+    const buttonHamburger = document.getElementById('button-hamburger')
+    const navbarItems = document.getElementById('navbar-items')
+    
+    buttonHamburger.addEventListener('click', () => {
+        buttonHamburger.classList.toggle('collapsed');
+        if (buttonHamburger.classList.contains('collapsed'))
+        {
+            buttonHamburger.setAttribute('aria-expanded', 'false')
+        } else {
+            buttonHamburger.setAttribute('aria-expanded', 'true')
+        }
+
+        navbarItems.classList.toggle('show');
+    })
+
     function toggleSearchTextboxVisiblity() {
 
         const headerSearchContainer = document.getElementById('header-search-container');

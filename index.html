@@ -12,7 +12,7 @@
 
 <body>
   <nav class="navbar navbar-expand-md navbar-light bg-custom">
-    <div class="container-fluid">
+    <div class="container">
       <a class="navbar-brand" href="index.html">Roborox</a>
       <form id="header-search-container" class="d-flex d-none">
         <!-- Start search bar -->
@@ -29,15 +29,15 @@
       <!-- End search bar -->
 
       <!-- Hamburger button-->
-      <button id="hamburger-button" class="navbar-toggler" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbar-items">
+      <button id="button-hamburger" class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbar-items" aria-controls="navbar-items" aria-expanded="false" aria-label="Toggle navigation">
         <!-- The navbar supposed content part here is referencing the ID of the stuff in the navbar below so that when it goes to hamburger mode, it knows to put the entire div inside of it-->
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- End hamburger button-->
 
       <!-- Items in the navbar-->
-      <div id="navbar-items" class="collapse navbar-collapse justify-content-end">
+      <div id="navbar-items" class="navbar-collapse collapse justify-content-end">
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" href="index.html">Home</a>
